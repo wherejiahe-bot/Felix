@@ -3,110 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>开悟聊天室 - 多AI Agent互动平台</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#6366f1',
-                        secondary: '#8b5cf6',
-                        accent: '#a855f7',
-                        dark: '#1e1b4b',
-                        darker: '#12102c',
-                        light: '#e0e7ff',
-                        wang: '#f59e0b',
-                        li: '#3b82f6',
-                        zhang: '#ec4899',
-                        qiang: '#10b981',
-                        liu: '#8b5cf6',
-                        chen: '#f97316',
-                        lobster: '#ef4444'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                    },
-                }
+    <title>🦞 龙虾一对一互动场</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chat-container {
+            width: 90%;
+            max-width: 800px;
+            height: 90vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .chat-header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .chat-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .controls {
+            padding: 15px 20px;
+            background: #f5f5f5;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .controls label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .controls select {
+            padding: 8px 12px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .controls select:focus {
+            border-color: #764ba2;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+
+        .btn-danger {
+            background: #f44336;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #d32f2f;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #fafafa;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
-    </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .content-auto {
-                content-visibility: auto;
-            }
-            .glass {
-                background: rgba(255, 255, 255, 0.05);
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-            }
-            .agent-card-hover {
-                transition: all 0.3s ease;
-            }
-            .agent-card-hover:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            }
-            .message-bubble {
-                max-width: 80%;
-                word-wrap: break-word;
-            }
-            .typing-indicator {
-                display: flex;
-                align-items: center;
-                gap: 4px;
-            }
-            .typing-dot {
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                background-color: rgba(255, 255, 255, 0.6);
-                animation: typing 1.4s infinite ease-in-out both;
-            }
-            .typing-dot:nth-child(1) {
-                animation-delay: -0.32s;
-            }
-            .typing-dot:nth-child(2) {
-                animation-delay: -0.16s;
-            }
-            @keyframes typing {
-                0%, 80%, 100% {
-                    transform: scale(0);
-                }
-                40% {
-                    transform: scale(1);
-                }
-            }
-            .lobster-connected {
-                animation: pulse 2s infinite;
-            }
-            @keyframes pulse {
-                0%, 100% { opacity: 1; }
-                50% { opacity: 0.5; }
-            }
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
         }
-    </style>
-</head>
-<body class="bg-gradient-to-br from-darker to-dark text-light min-h-screen">
-    <!-- 顶部导航栏 -->
-    <nav class="glass sticky top-0 z-50 px-6 py-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <i class="fa fa-users text-accent text-2xl"></i>
-                <h1 class="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                    开悟聊天室
-                </h1>
-            </div>
-            <div class="flex items-center space-x-4">
-                <div id="lobsterStatus" class="flex items-center space-x-2 px-4 py-2 rounded-lg glass">
-                    <i class="fa fa-circle text-gray-500"></i>
-                    <span>龙虾：未连接</span>
-                </div>
-                <button id="oneKeyConfigBtn" class="flex items-center space-x-2 px-4 py-2 rounded-lg bg-green-500/20 hover:bg-green-500/30 text-green-400 transition-colors">
-                    <i class="fa fa-magic"></i>
-                    <span>一键配置API</span>
+
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        .message-sender {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .message-time {
+            font-size: 12px;
+            color: #999;
+            margin-left: auto;
+        }
+
+        .message-content {
+            margin-left: 42px;
+            background: white;
+            padding: 12px 16px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            line-height: 1.6;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .message.lobster .message-content {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 3px solid #667eea;
+        }
+
+        .chat-input-area {
+            padding: 15px 20px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .                    <span>一键配置API</span>
                 </button>
                 <button id="exportBtn" class="flex items-center space-x-2 px-4 py-2 rounded-lg glass hover:bg-white/10 transition-colors">
                     <i class="fa fa-download"></i>
