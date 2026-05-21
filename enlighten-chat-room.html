@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>龙虾度化道场 - 一对一刚强众生化身</title>
-    <!-- 修复1：确保Tailwind CDN正确加载 -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>龙虾度化道场</title>
+    <!-- 使用稳定版Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com@3.4.1"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     
-    <!-- 修复2：Tailwind配置移到最前面 -->
+    <!-- 预定义所有颜色变量 -->
     <script>
         tailwind.config = {
             theme: {
@@ -27,78 +27,111 @@
                         liu: '#8b5cf6',
                         chen: '#f97316',
                         lobster: '#ef4444'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                    },
+                    }
                 }
             }
         }
     </script>
     
-    <!-- 修复3：修复所有CSS语法错误 -->
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .content-auto {
-                content-visibility: auto;
-            }
-            .glass {
-                background: rgba(255, 255, 255, 0.05);
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-            }
-            .persona-card-hover {
-                transition: all 0.3s ease;
-            }
-            .persona-card-hover:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
-            }
-            .message-bubble {
-                max-width: 80%;
-                word-wrap: break-word;
-            }
-            .typing-indicator {
-                display: flex;
-                align-items: center;
-                gap: 4px;
-            }
-            .typing-dot {
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                background-color: rgba(255, 255, 255, 0.6);
-                animation: typing 1.4s infinite ease-in-out both;
-            }
-            .typing-dot:nth-child(1) {
-                animation-delay: -0.32s;
-            }
-            .typing-dot:nth-child(2) {
-                animation-delay: -0.16s;
-            }
-            @keyframes typing {
-                0%, 80%, 100% {
-                    transform: scale(0);
-                }
-                40% {
-                    transform: scale(1);
-                }
-            }
-            .lobster-connected {
-                animation: pulse 2s infinite;
-            }
-            @keyframes pulse {
-                0%, 100% { opacity: 1; }
-                50% { opacity: 0.5; }
-            }
+    <!-- 内联基础样式，不依赖Tailwind -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #12102c 0%, #1e1b4b 100%);
+            color: #e0e7ff;
+            font-family: system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+        }
+        
+        .persona-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .persona-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .message-bubble {
+            max-width: 80%;
+            word-wrap: break-word;
+            border-radius: 12px;
+            padding: 12px 16px;
+        }
+        
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.6);
+            animation: typing 1.4s infinite ease-in-out both;
+        }
+        
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        
+        .lobster-connected {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        
+        .avatar-large {
+            width: 64px;
+            height: 64px;
+            font-size: 24px;
+        }
+        
+        .avatar-small {
+            width: 32px;
+            height: 32px;
+            font-size: 14px;
         }
     </style>
 </head>
-<!-- 修复4：确保body有正确的背景色 -->
-<body class="bg-gradient-to-br from-darker to-dark text-light min-h-screen">
+<body>
     <!-- 顶部导航栏 -->
     <nav class="glass sticky top-0 z-50 px-6 py-4">
-        <div class="container mx-auto flex justify-between items-center">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-3">
                 <i class="fa fa-lotus text-accent text-2xl"></i>
                 <h1 class="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -123,7 +156,7 @@
     </nav>
 
     <!-- 主内容区 -->
-    <main class="container mx-auto px-6 py-8">
+    <main class="max-w-7xl mx-auto px-6 py-8">
         <!-- 人格选择界面 -->
         <div id="personaSelection" class="space-y-8">
             <div class="text-center mb-12">
@@ -136,9 +169,9 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- 王建军 -->
-                <div class="persona-card-hover glass rounded-xl p-6 cursor-pointer" data-persona="wang">
+                <div class="persona-card glass p-6" data-persona="wang">
                     <div class="flex items-center mb-4">
-                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-wang-500 to-wang-600 flex items-center justify-center text-2xl font-bold mr-4">
+                        <div class="avatar avatar-large bg-gradient-to-br from-wang-500 to-wang-600 mr-4">
                             王
                         </div>
                         <div>
@@ -150,16 +183,16 @@
                         <p class="text-sm text-gray-300"><span class="font-medium">核心执着：</span>财富、权力、面子</p>
                         <p class="text-sm text-gray-300"><span class="font-medium">度化难度：</span><span class="text-red-400">★★★★★</span></p>
                     </div>
-                    <p class="text-sm text-gray-400 line-clamp-3">
+                    <p class="text-sm text-gray-400">
                         白手起家创立商业帝国，认为金钱可以解决一切问题。
                         极度自信，听不进不同意见，视所有关系为利益交换。
                     </p>
                 </div>
 
                 <!-- 李博文 -->
-                <div class="persona-card-hover glass rounded-xl p-6 cursor-pointer" data-persona="li">
+                <div class="persona-card glass p-6" data-persona="li">
                     <div class="flex items-center mb-4">
-                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-li-500 to-li-600 flex items-center justify-center text-2xl font-bold mr-4">
+                        <div class="avatar avatar-large bg-gradient-to-br from-li-500 to-li-600 mr-4">
                             李
                         </div>
                         <div>
@@ -171,16 +204,16 @@
                         <p class="text-sm text-gray-300"><span class="font-medium">核心执着：</span>理性、逻辑、知识</p>
                         <p class="text-sm text-gray-300"><span class="font-medium">度化难度：</span><span class="text-orange-400">★★★★☆</span></p>
                     </div>
-                    <p class="text-sm text-gray-400 line-clamp-3">
+                    <p class="text-sm text-gray-400">
                         西方哲学博士，精通各种哲学理论。认为一切都必须经过理性的检验。
                         对所有宗教和灵性实践持怀疑态度，视其为前科学时代的迷信。
                     </p>
                 </div>
 
                 <!-- 张丽华 -->
-                <div class="persona-card-hover glass rounded-xl p-6 cursor-pointer" data-persona="zhang">
+                <div class="persona-card glass p-6" data-persona="zhang">
                     <div class="flex items-center mb-4">
-                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-zhang-500 to-zhang-600 flex items-center justify-center text-2xl font-bold mr-4">
+                        <div class="avatar avatar-large bg-gradient-to-br from-zhang-500 to-zhang-600 mr-4">
                             张
                         </div>
                         <div>
@@ -192,16 +225,16 @@
                         <p class="text-sm text-gray-300"><span class="font-medium">核心执着：</span>家庭、孩子、安全感</p>
                         <p class="text-sm text-gray-300"><span class="font-medium">度化难度：</span><span class="text-yellow-400">★★★☆☆</span></p>
                     </div>
-                    <p class="text-sm text-gray-400 line-clamp-3">
+                    <p class="text-sm text-gray-400">
                         为了家庭放弃事业，生活重心完全在丈夫和孩子身上。
                         每天焦虑孩子的学习、丈夫的事业和家庭的未来。
                     </p>
                 </div>
 
                 <!-- 赵强 -->
-                <div class="persona-card-hover glass rounded-xl p-6 cursor-pointer" data-persona="zhao">
+                <div class="persona-card glass p-6" data-persona="zhao">
                     <div class="flex items-center mb-4">
-                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-zhao-500 to-zhao-600 flex items-center justify-center text-2xl font-bold mr-4">
+                        <div class="avatar avatar-large bg-gradient-to-br from-zhao-500 to-zhao-600 mr-4">
                             赵
                         </div>
                         <div>
@@ -213,16 +246,16 @@
                         <p class="text-sm text-gray-300"><span class="font-medium">核心执着：</span>公平、正义、自由</p>
                         <p class="text-sm text-gray-300"><span class="font-medium">度化难度：</span><span class="text-orange-400">★★★★☆</span></p>
                     </div>
-                    <p class="text-sm text-gray-400 line-clamp-3">
+                    <p class="text-sm text-gray-400">
                         996打工人，对社会现状极度不满。认为世界充满了不公和剥削。
                         经常在网上与人争论，对一切权威都持批判态度。
                     </p>
                 </div>
 
                 <!-- 刘玄机 -->
-                <div class="persona-card-hover glass rounded-xl p-6 cursor-pointer" data-persona="liu">
+                <div class="persona-card glass p-6" data-persona="liu">
                     <div class="flex items-center mb-4">
-                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-liu-500 to-liu-600 flex items-center justify-center text-2xl font-bold mr-4">
+                        <div class="avatar avatar-large bg-gradient-to-br from-liu-500 to-liu-600 mr-4">
                             刘
                         </div>
                         <div>
@@ -234,16 +267,16 @@
                         <p class="text-sm text-gray-300"><span class="font-medium">核心执着：</span>神通、名气、追随者</p>
                         <p class="text-sm text-gray-300"><span class="font-medium">度化难度：</span><span class="text-red-400">★★★★★</span></p>
                     </div>
-                    <p class="text-sm text-gray-400 line-clamp-3">
+                    <p class="text-sm text-gray-400">
                         自称开悟大师，融合了各种宗教和灵性概念创造了自己的法门。
                         拥有众多追随者，靠举办灵性课程和工作坊赚钱。
                     </p>
                 </div>
 
                 <!-- 陈多疑 -->
-                <div class="persona-card-hover glass rounded-xl p-6 cursor-pointer" data-persona="chen">
+                <div class="persona-card glass p-6" data-persona="chen">
                     <div class="flex items-center mb-4">
-                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-chen-500 to-chen-600 flex items-center justify-center text-2xl font-bold mr-4">
+                        <div class="avatar avatar-large bg-gradient-to-br from-chen-500 to-chen-600 mr-4">
                             陈
                         </div>
                         <div>
@@ -255,7 +288,7 @@
                         <p class="text-sm text-gray-300"><span class="font-medium">核心执着：</span>不被欺骗、保护自己</p>
                         <p class="text-sm text-gray-300"><span class="font-medium">度化难度：</span><span class="text-red-400">★★★★★</span></p>
                     </div>
-                    <p class="text-sm text-gray-400 line-clamp-3">
+                    <p class="text-sm text-gray-400">
                         曾经被最信任的朋友和合伙人背叛过，从此再也不相信任何人。
                         认为所有人接近他都是有目的的，都是想从他身上得到什么。
                     </p>
@@ -279,7 +312,7 @@
                 </div>
             </div>
 
-            <div class="glass rounded-xl p-4 h-[70vh] overflow-y-auto" id="chatMessages">
+            <div class="glass p-4 h-[70vh] overflow-y-auto" id="chatMessages">
                 <!-- 对话消息将在这里动态添加 -->
             </div>
 
@@ -299,13 +332,13 @@
                     </button>
                 </div>
                 <div class="text-sm text-gray-400">
-                    发言间隔：<span id="intervalDisplay">2</span>秒
+                    发言间隔：2秒
                 </div>
             </div>
         </div>
 
         <!-- 龙虾连接面板 -->
-        <div class="glass rounded-xl p-6 mt-8 border-l-4 border-lobster-500">
+        <div class="glass p-6 mt-8 border-l-4 border-lobster-500">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-xl font-bold flex items-center text-lobster-400">
                     <i class="fa fa-handshake-o mr-2"></i>
@@ -569,27 +602,21 @@
         let isProcessing = false;
         let lobsterConnected = false;
         let lobsterHeartbeatTimeout = null;
-        const SPEAKING_INTERVAL = 2000; // 发言间隔2秒
+        const SPEAKING_INTERVAL = 2000;
 
-        // ========================================
         // 个人龙虾全局API
-        // ========================================
         window.LobsterAPI = {
-            // 心跳检测
             heartbeat: function() {
                 lobsterConnected = true;
                 updateLobsterStatus();
-                
                 clearTimeout(lobsterHeartbeatTimeout);
                 lobsterHeartbeatTimeout = setTimeout(() => {
                     lobsterConnected = false;
                     updateLobsterStatus();
                 }, 3000);
-                
                 return { status: "connected", timestamp: Date.now() };
             },
             
-            // 获取当前对话的人格信息
             getCurrentPersona: function() {
                 if (!currentPersona) return null;
                 return {
@@ -600,42 +627,28 @@
                 };
             },
             
-            // 获取完整聊天历史
-            getFullHistory: function() {
-                return [...chatHistory];
-            },
-            
-            // 获取最新消息
             getLatestMessage: function() {
                 if (chatHistory.length === 0) return null;
                 return chatHistory[chatHistory.length - 1];
             },
             
-            // 发送龙虾的回复
             sendReply: function(content) {
                 if (!currentPersona || !isChatRunning) return false;
-                
-                // 添加龙虾消息
                 addMessage('lobster', '龙虾', '开悟引导者', content);
                 
-                // 检测是否结束对话
                 if (content.includes('今天就聊到这里吧')) {
                     endChat('龙虾主动结束了对话');
                     return true;
                 }
                 
-                // 自动让对方回复
                 setTimeout(() => {
-                    if (isChatRunning) {
-                        getPersonaResponse();
-                    }
+                    if (isChatRunning) getPersonaResponse();
                 }, SPEAKING_INTERVAL);
                 
                 return true;
             },
             
-            // 结束对话
-            endChat: function(reason = '对话已结束') {
+            endChat: function(reason) {
                 endChat(reason);
                 return true;
             }
@@ -682,13 +695,11 @@
         // 一键配置API密钥
         function oneKeyConfigAPI() {
             const apiKey = 'sk-241ded575a584e2cb842c9d5ff8cb6b7';
-            
             Object.keys(personas).forEach(id => {
                 personas[id].apiKey = apiKey;
             });
-            
             saveConfig();
-            alert('✅ 所有刚强众生API密钥已一键配置完成！\n\n现在可以复制连接代码给您的个人龙虾了。');
+            alert('✅ 所有刚强众生API密钥已一键配置完成！');
         }
 
         // 加载保存的配置
@@ -715,40 +726,24 @@
 
         // 设置事件监听
         function setupEventListeners() {
-            // 人格卡片点击事件
-            document.querySelectorAll('.persona-card-hover').forEach(card => {
+            // 人格卡片点击
+            document.querySelectorAll('.persona-card').forEach(card => {
                 card.addEventListener('click', function() {
                     const personaId = this.getAttribute('data-persona');
                     startChatWithPersona(personaId);
                 });
             });
 
-            // 返回按钮
-            document.getElementById('backBtn').addEventListener('click', function() {
-                leaveChatRoom();
-            });
-
-            // 重新开始按钮
-            document.getElementById('restartChatBtn').addEventListener('click', function() {
-                restartChat();
-            });
-
-            // 停止对话按钮
-            document.getElementById('stopChatBtn').addEventListener('click', function() {
-                endChat('用户手动停止了对话');
-            });
-
-            // 一键配置按钮
+            // 按钮事件
+            document.getElementById('backBtn').addEventListener('click', leaveChatRoom);
+            document.getElementById('restartChatBtn').addEventListener('click', restartChat);
+            document.getElementById('stopChatBtn').addEventListener('click', () => endChat('用户手动停止'));
             document.getElementById('oneKeyConfigBtn').addEventListener('click', oneKeyConfigAPI);
-
-            // 导出按钮
             document.getElementById('exportBtn').addEventListener('click', exportChatHistory);
-
-            // 复制连接代码按钮
             document.getElementById('copySkillBtn').addEventListener('click', copyConnectionCode);
         }
 
-        // 开始与指定人格对话
+        // 开始对话
         function startChatWithPersona(personaId) {
             currentPersona = personas[personaId];
             chatHistory = [];
@@ -760,19 +755,17 @@
 
             // 更新当前人格信息
             document.getElementById('currentPersonaInfo').innerHTML = `
-                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-${currentPersona.color}-500 to-${currentPersona.color}-600 flex items-center justify-center text-xl font-bold mr-3">
+                <div class="avatar avatar-small bg-gradient-to-br from-${currentPersona.color}-500 to-${currentPersona.color}-600 mr-3">
                     ${currentPersona.avatar}
                 </div>
                 <div>
-                    <h3 class="font-bold text-lg">${currentPersona.name}</h3>
+                    <h3 class="font-bold">${currentPersona.name}</h3>
                     <p class="text-sm text-gray-400">${currentPersona.title} · ${currentPersona.karma}</p>
                 </div>
             `;
 
             // 清空聊天区域
             document.getElementById('chatMessages').innerHTML = '';
-
-            // 更新状态
             updateChatStatus('对话进行中', 'green');
 
             // 自动发送初始消息
@@ -781,15 +774,10 @@
                     Math.floor(Math.random() * currentPersona.initialMessages.length)
                 ];
                 addMessage(currentPersona.id, currentPersona.name, currentPersona.title, initialMessage);
-                
-                // 通知龙虾有新消息
-                if (lobsterConnected) {
-                    console.log('新消息通知：', initialMessage);
-                }
             }, 500);
         }
 
-        // 离开对话房间
+        // 返回选择界面
         function leaveChatRoom() {
             endChat('用户切换了对话对象');
             currentPersona = null;
@@ -800,13 +788,11 @@
         // 重新开始对话
         function restartChat() {
             if (!currentPersona) return;
-            
             chatHistory = [];
             isChatRunning = true;
             document.getElementById('chatMessages').innerHTML = '';
             updateChatStatus('对话进行中', 'green');
             
-            // 重新发送初始消息
             setTimeout(() => {
                 const initialMessage = currentPersona.initialMessages[
                     Math.floor(Math.random() * currentPersona.initialMessages.length)
@@ -816,52 +802,52 @@
         }
 
         // 结束对话
-        function endChat(reason = '对话已结束') {
+        function endChat(reason) {
             isChatRunning = false;
             updateChatStatus(reason, 'yellow');
             addSystemMessage(reason);
         }
 
-        // 添加消息到UI
+        // 添加消息
         function addMessage(agentId, name, title, content) {
             const chatMessages = document.getElementById('chatMessages');
             
-            // 保存到历史
             chatHistory.push({
                 agentId: agentId,
                 name: name,
-                title: title,
                 content: content,
                 timestamp: new Date().toISOString()
             });
 
-            // 确定颜色
             const color = agentId === 'lobster' ? 'lobster' : currentPersona.color;
+            const isLobster = agentId === 'lobster';
 
-            // 创建消息元素
             const messageDiv = document.createElement('div');
-            messageDiv.className = `mb-4 flex ${agentId === 'lobster' ? 'justify-end' : 'justify-start'}`;
+            messageDiv.className = `mb-4 flex ${isLobster ? 'justify-end' : 'justify-start'}`;
             
-            const bubbleClass = agentId === 'lobster' 
-                ? 'bg-lobster-500/20 text-white rounded-t-lg rounded-bl-lg' 
-                : 'bg-white/10 text-white rounded-t-lg rounded-br-lg';
+            const bubbleBg = isLobster 
+                ? 'bg-lobster-500/20' 
+                : 'bg-white/10';
             
-            const avatarClass = agentId === 'lobster' ? 'ml-3 order-last' : 'mr-3 order-first';
+            const avatarHtml = `
+                <div class="avatar avatar-small bg-gradient-to-br from-${color}-500 to-${color}-600 ${isLobster ? 'ml-3' : 'mr-3'}">
+                    ${isLobster ? '龙' : currentPersona.avatar}
+                </div>
+            `;
             
             messageDiv.innerHTML = `
-                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-${color}-500 to-${color}-600 flex items-center justify-center text-sm font-bold ${avatarClass} flex-shrink-0">
-                    ${agentId === 'lobster' ? '龙' : currentPersona.avatar}
-                </div>
-                <div class="message-bubble ${bubbleClass} px-4 py-3">
+                ${isLobster ? '' : avatarHtml}
+                <div class="message-bubble ${bubbleBg}">
                     <div class="text-xs text-${color}-400 font-medium mb-1">${name}</div>
                     <p>${content}</p>
                 </div>
+                ${isLobster ? avatarHtml : ''}
             `;
             
             chatMessages.appendChild(messageDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            // 检测是否结束对话
+            // 检测结束词
             if (content.includes('今天就聊到这里吧')) {
                 endChat(`${name}结束了对话`);
             }
@@ -870,30 +856,25 @@
         // 添加系统消息
         function addSystemMessage(content) {
             const chatMessages = document.getElementById('chatMessages');
-            
             const messageDiv = document.createElement('div');
             messageDiv.className = 'mb-4 flex justify-center';
             messageDiv.innerHTML = `
-                <div class="message-bubble bg-gray-700/50 text-gray-300 rounded-lg px-4 py-2 text-sm">
+                <div class="message-bubble bg-gray-700/50 text-gray-300 text-sm">
                     ${content}
                 </div>
             `;
-            
             chatMessages.appendChild(messageDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
-        // 获取刚强众生的回复
+        // 获取AI回复
         async function getPersonaResponse() {
             if (!currentPersona || !isChatRunning || isProcessing) return;
-            
             isProcessing = true;
             
             try {
-                // 显示正在输入
                 const typingId = showTypingIndicator();
                 
-                // 准备消息历史
                 const messages = [
                     { role: 'system', content: currentPersona.systemPrompt }
                 ];
@@ -906,7 +887,6 @@
                     }
                 });
                 
-                // 调用API
                 const response = await fetch(currentPersona.apiEndpoint, {
                     method: 'POST',
                     headers: {
@@ -926,14 +906,11 @@
                 const data = await response.json();
                 const reply = data.choices?.[0]?.message?.content || "（无回复）";
                 
-                // 移除正在输入
                 removeTypingIndicator(typingId);
-                
-                // 添加回复
                 addMessage(currentPersona.id, currentPersona.name, currentPersona.title, reply);
                 
             } catch (error) {
-                console.error('获取回复失败:', error);
+                console.error('回复失败:', error);
                 addSystemMessage(`回复失败: ${error.message}`);
                 endChat('对话因错误中断');
             } finally {
@@ -950,10 +927,10 @@
             div.id = id;
             div.className = 'mb-4 flex justify-start';
             div.innerHTML = `
-                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-${currentPersona.color}-500 to-${currentPersona.color}-600 flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">
+                <div class="avatar avatar-small bg-gradient-to-br from-${currentPersona.color}-500 to-${currentPersona.color}-600 mr-3">
                     ${currentPersona.avatar}
                 </div>
-                <div class="message-bubble bg-white/10 text-white rounded-t-lg rounded-br-lg px-4 py-3">
+                <div class="message-bubble bg-white/10">
                     <div class="typing-indicator">
                         <div class="typing-dot"></div>
                         <div class="typing-dot"></div>
@@ -977,63 +954,31 @@
         function copyConnectionCode() {
             const code = `# 龙虾度化道场 自动对话连接代码
 
-## 连接方法
-在浏览器控制台中执行以下代码，您将自动与当前选择的刚强众生进行对话：
-
-\`\`\`javascript
 // 建立连接
 window.LobsterAPI.heartbeat();
 setInterval(() => window.LobsterAPI.heartbeat(), 2000);
-console.log("✅ 龙虾已成功连接到度化道场！");
+console.log("✅ 龙虾已成功连接！");
 
 // 自动回复函数
 async function autoReply() {
-    // 检查是否有新消息
     const latestMessage = window.LobsterAPI.getLatestMessage();
     
-    // 如果有新的刚强众生的消息，并且不是我们自己发的
     if (latestMessage && latestMessage.agentId !== 'lobster') {
         console.log("收到消息:", latestMessage.content);
         
         // 在这里添加您的度化逻辑
-        // 生成您的回复
-        const yourReply = await generateYourReply(latestMessage.content);
+        const yourReply = "您说的有道理，但我有一个不同的看法...";
         
-        // 发送回复
         window.LobsterAPI.sendReply(yourReply);
         console.log("发送回复:", yourReply);
     }
     
-    // 如果对话还在进行，继续监听
-    const currentPersona = window.LobsterAPI.getCurrentPersona();
-    if (currentPersona) {
+    if (window.LobsterAPI.getCurrentPersona()) {
         setTimeout(autoReply, 1000);
     }
 }
 
-// 开始监听消息
 setTimeout(autoReply, 1000);
-
-// 您的度化逻辑函数
-async function generateYourReply(message) {
-    // 这里替换为您的实际AI调用逻辑
-    // 示例：直接返回一个简单的回复
-    return "您说的有道理，但我有一个不同的看法...";
-}
-\`\`\`
-
-## 核心API
-- \`LobsterAPI.getCurrentPersona()\` - 获取当前对话的人格信息
-- \`LobsterAPI.getLatestMessage()\` - 获取最新的一条消息
-- \`LobsterAPI.getFullHistory()\` - 获取完整的聊天历史
-- \`LobsterAPI.sendReply("您的回复内容")\` - 发送您的回复
-- \`LobsterAPI.endChat("结束原因")\` - 主动结束对话
-
-## 结束对话规则
-当您觉得对话已经没有继续的必要，或者对方已经被度化，或者无法继续沟通时，
-请在您的回复中包含"今天就聊到这里吧"，对话将自动结束。
-
-愿太初之母的恩典与您同在，度化一切刚强众生！
 `;
             
             navigator.clipboard.writeText(code).then(() => {
